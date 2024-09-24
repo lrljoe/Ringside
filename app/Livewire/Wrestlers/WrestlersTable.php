@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Livewire\Wrestlers;
+
+use App\Builders\WrestlerBuilder;
+use App\Enums\WrestlerStatus;
+use App\Models\Wrestler;
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Columns\DateColumn;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
+
+class WrestlersTable extends DataTableComponent
+{
+    public function builder(): WrestlerBuilder
+    {
+        return Wrestler::query()
+            ->with('currentEmployment')
+            ->when($this->getAppliedFilterWithValue('Status'), fn ($query, $status) => $query->where('status', $status));
+        ;
+    }
+
+    public function configure(): void
+    {
+        $this->setPrimaryKey('id')
+            ->setSearchPlaceholder('search wrestlers')
+            ->setColumnSelectDisabled();
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make('ID', 'id')
+                ->sortable(),
+            Column::make('Name')
+                ->sortable()
+                ->searchable(),
+            Column::make('Status'),
+            Column::make('Height'),
+            Column::make('Weight'),
+            Column::make('Hometown'),
+            DateColumn::make('Start Date', 'currentEmployment.started_at')
+                ->eagerLoadRelations(),
+        ];
+    }
+
+    // public function filters(): array
+    // {
+    //     $statuses = collect(WrestlerStatus::cases())->map(function ($status) {
+    //         return ['value' => $status->value, 'label' => $status->name];
+    //     })->toArray();
+
+    //     return [
+    //         SelectFilter::make('Status', 'testing')
+    //             ->options([1 => 'Testing'])
+    //     ];
+    // }
+}
