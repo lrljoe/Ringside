@@ -23,11 +23,19 @@ class WrestlersTable extends DataTableComponent
         ;
     }
 
+    public function bulkActions(): array
+    {
+        return [
+            'exportSelected' => 'Export',
+        ];
+    }
+
     public function configure(): void
     {
         $this->setPrimaryKey('id')
             ->setSearchPlaceholder('search wrestlers')
-            ->setColumnSelectDisabled();
+            ->setColumnSelectDisabled()
+            ->filtersAreEnabled();
     }
 
     public function columns(): array
@@ -38,24 +46,35 @@ class WrestlersTable extends DataTableComponent
             Column::make('Name')
                 ->sortable()
                 ->searchable(),
-            Column::make('Status'),
+            Column::make('Status')
+                ->view('status'),
             Column::make('Height'),
             Column::make('Weight'),
             Column::make('Hometown'),
             DateColumn::make('Start Date', 'currentEmployment.started_at')
                 ->eagerLoadRelations(),
+            Column::make('Action')
+                ->label(
+                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                        [
+                            'viewLink' => route('wrestlers.show', $row),
+                            'editLink' => route('wrestlers.edit', $row),
+                            'deleteLink' => route('wrestlers.destroy', $row),
+                        ]
+                    )
+                )->html(),
         ];
     }
 
-    // public function filters(): array
-    // {
-    //     $statuses = collect(WrestlerStatus::cases())->map(function ($status) {
-    //         return ['value' => $status->value, 'label' => $status->name];
-    //     })->toArray();
+    public function filters(): array
+    {
+        $statuses = collect(WrestlerStatus::cases())->map(function ($status) {
+            return ['value' => $status->value, 'label' => $status->name];
+        })->toArray();
 
-    //     return [
-    //         SelectFilter::make('Status', 'testing')
-    //             ->options([1 => 'Testing'])
-    //     ];
-    // }
+        return [
+            SelectFilter::make('Status', 'testing')
+                ->options([1 => 'Testing'])
+        ];
+    }
 }
