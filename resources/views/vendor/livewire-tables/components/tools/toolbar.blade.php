@@ -2,7 +2,7 @@
 @props([])
 
 <h3 class="card-title font-medium text-sm">
-    Showing {{ $this->perPage }} of {{ $this->getRows->total() }}
+    Showing {{ $this->getRows->count() }} of {{ $this->getRows->total() }}
 </h3>
 
 <div class="flex flex-wrap gap-2 lg:gap-5">
