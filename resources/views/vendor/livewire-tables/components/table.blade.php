@@ -43,7 +43,7 @@
                 @if ($this->paginationVisibilityIsEnabled())
                     <span
                         data-datatable-info="true">{{ $this->getRows->firstItem() }}-{{ $this->getRows->lastItem() }}
-                        of {{ $this->getRows->count() }}</span>
+                        of {{ $this->getRows->total() }}</span>
                     <div class="pagination">
                         @if ($this->paginationIsEnabled())
                             {{ $this->getRows->links('livewire-tables::specific.tailwind.' . (!$this->isPaginationMethod('standard') ? 'simple-' : '') . 'pagination') }}
