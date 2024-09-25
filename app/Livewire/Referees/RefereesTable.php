@@ -31,7 +31,7 @@ class RefereesTable extends DataTableComponent
     {
         return [
             Column::make('Name')
-                ->label(fn ($row, Column $column) => ucwords($row->first_name . ' ' . $row->last_name))
+                ->label(fn ($row, Column $column) => ucwords($row->first_name.' '.$row->last_name))
                 ->sortable(),
             Column::make(__('referees.status'), 'status')
                 ->view('status'),
