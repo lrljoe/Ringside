@@ -25,6 +25,10 @@ class WrestlersTable extends DataTableComponent
 
     public function builder(): WrestlerBuilder
     {
+        return Wrestler::query()
+            ->with('employments:id,started_at')->withWhereHas('employments', function ($query) {
+                $query->where('started_at', '<=', now())->whereNull('ended_at')->limit(1);
+            });
     }
 
     public function columns(): array
@@ -38,15 +42,15 @@ class WrestlersTable extends DataTableComponent
             Column::make(__('wrestlers.height'), 'height'),
             Column::make(__('wrestlers.weight'), 'weight'),
             Column::make(__('wrestlers.hometown'), 'hometown'),
-            // Column::make(__('employments.start_date'), 'started_at')
-            //     ->label(fn ($row, Column $column) => $row->employments->first()->started_at->format('Y-m-d')),
+            Column::make(__('employments.start_date'), 'started_at')
+                ->label(fn ($row, Column $column) => $row->employments->first()->started_at->format('Y-m-d')),
             Column::make(__('core.actions'), 'actions')
                 ->label(
                     fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
-                            'viewLink' => route('wrestlers.show', $row),
-                            'editLink' => route('wrestlers.edit', $row),
-                            'deleteLink' => route('wrestlers.destroy', $row),
+                            'rowId' => $row->id,
+                            'path' => $this->routeBasePath,
+                            'links' => $this->actionLinksToDisplay,
                         ]
                     )
                 )->html(),
