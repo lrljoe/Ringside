@@ -28,7 +28,7 @@
             :class="open ? 'show' : 'hidden'">
             @if ($links['view'] ?? true)
                 <div class="menu-item">
-                    <a href="{{ route($path . '.show', $rowId) }}">
+                    <a class="menu-link" href="{{ route($path . '.show', $rowId) }}">
                         <span class="menu-icon">
                             <i class="ki-filled ki-search-list"></i>
                         </span>
@@ -41,7 +41,7 @@
 
             @if ($links['edit'] ?? true)
                 <div class="menu-item">
-                    <a href="{{ route($path . '.edit', $rowId) }}">
+                    <a class="menu-link" href="{{ route($path . '.edit', $rowId) }}">
                         <span class="menu-icon">
                             <i class="ki-filled ki-pencil"></i>
                         </span>
@@ -50,18 +50,17 @@
                 </div>
             @endif
 
+            <div class="menu-separator"></div>
+
             @if ($links['delete'] ?? true)
                 <div class="menu-item">
-                    <form action="{{ route($path . '.destroy', $rowId) }}" class="d-inline" method="POST" x-data
-                        @submit.prevent="if (confirm('Are you sure you want to delete this user?')) $el.submit()">
-                        @method('DELETE')
-                        @csrf
-
-                        <button type="submit" class="btn btn-link">
-                            <i class="fa-solid fa-trash"></i>
-                            Remove
-                        </button>
-                    </form>
+                    <button class="menu-link" wire:confirm="Are you sure you want to delete this wrestler?"
+                        wire:click="delete({{ $rowId }})">
+                        <span class="menu-icon">
+                            <i class="ki-filled ki-trash"></i>
+                        </span>
+                        <span class="menu-title">Remove</span>
+                    </button>
                 </div>
             @endif
         </div>
