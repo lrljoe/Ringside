@@ -14,11 +14,9 @@ class TagTeamsTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "tag_teams";
+    protected string $databaseTableName = 'tag_teams';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): TagTeamBuilder
     {

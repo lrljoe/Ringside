@@ -14,11 +14,9 @@ class VenuesTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "venues";
+    protected string $databaseTableName = 'venues';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): Builder
     {

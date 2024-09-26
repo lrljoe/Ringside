@@ -14,11 +14,9 @@ class StablesTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "stables";
+    protected string $databaseTableName = 'stables';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): StableBuilder
     {

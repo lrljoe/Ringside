@@ -14,14 +14,13 @@ class WrestlersTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "wrestlers";
+    protected string $databaseTableName = 'wrestlers';
 
     protected string $routeBasePath = 'wrestlers';
+
     protected array $actionLinksToDisplay = ['view' => true, 'edit' => true, 'delete' => true];
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): WrestlerBuilder
     {

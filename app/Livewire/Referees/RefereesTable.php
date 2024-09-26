@@ -14,11 +14,9 @@ class RefereesTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "referees";
+    protected string $databaseTableName = 'referees';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): RefereeBuilder
     {

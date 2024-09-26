@@ -14,11 +14,9 @@ class TitlesTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "titles";
+    protected string $databaseTableName = 'titles';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): TitleBuilder
     {

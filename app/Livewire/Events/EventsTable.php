@@ -15,11 +15,9 @@ class EventsTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "events";
+    protected string $databaseTableName = 'events';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): EventBuilder
     {

@@ -14,11 +14,9 @@ class ManagersTable extends DataTableComponent
 {
     use BaseTableTrait;
 
-    protected string $databaseTableName = "managers";
+    protected string $databaseTableName = 'managers';
 
-    public function configure(): void
-    {
-    }
+    public function configure(): void {}
 
     public function builder(): ManagerBuilder
     {
