@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace App\Livewire\Wrestlers;
 
 use App\Builders\WrestlerBuilder;
+use App\Livewire\Concerns\BaseTableTrait;
 use App\Models\Wrestler;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class WrestlersTable extends DataTableComponent
 {
-    public function builder(): WrestlerBuilder
-    {
-        return Wrestler::query();
-        // ->with('employments:id,started_at')->withWhereHas('employments', function ($query) {
-        //     $query->where('started_at', '<=', now())->whereNull('ended_at')->limit(1);
-        // });
-    }
+    use BaseTableTrait;
+
+    protected string $databaseTableName = "wrestlers";
+
+    protected string $routeBasePath = 'wrestlers';
+    protected array $actionLinksToDisplay = ['view' => true, 'edit' => true, 'delete' => true];
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id')
-            ->setSearchPlaceholder('search wrestlers')
-            ->setColumnSelectDisabled()
-            ->setPaginationEnabled();
+    }
+
+    public function builder(): WrestlerBuilder
+    {
     }
 
     public function columns(): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Venues;
 
+use App\Livewire\Concerns\BaseTableTrait;
 use App\Models\Venue;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -11,17 +12,17 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class VenuesTable extends DataTableComponent
 {
-    public function builder(): Builder
-    {
-        return Venue::query();
-    }
+    use BaseTableTrait;
+
+    protected string $databaseTableName = "venues";
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id')
-            ->setSearchPlaceholder('search venues')
-            ->setColumnSelectDisabled()
-            ->setPaginationEnabled();
+    }
+
+    public function builder(): Builder
+    {
+        return Venue::query();
     }
 
     public function columns(): array

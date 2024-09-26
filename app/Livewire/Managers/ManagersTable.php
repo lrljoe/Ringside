@@ -5,26 +5,27 @@ declare(strict_types=1);
 namespace App\Livewire\Managers;
 
 use App\Builders\ManagerBuilder;
+use App\Livewire\Concerns\BaseTableTrait;
 use App\Models\Manager;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ManagersTable extends DataTableComponent
 {
-    public function builder(): ManagerBuilder
-    {
-        return Manager::query()
-            ->with('employments:id,started_at')->withWhereHas('employments', function ($query) {
-                $query->where('started_at', '<=', now())->whereNull('ended_at')->limit(1);
-            });
-    }
+    use BaseTableTrait;
+
+    protected string $databaseTableName = "managers";
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id')
-            ->setSearchPlaceholder('search managers')
-            ->setColumnSelectDisabled()
-            ->setPaginationEnabled();
+    }
+
+    public function builder(): ManagerBuilder
+    {
+        return Manager::query()
+            ->with('employments:manager_id,started_at')->withWhereHas('employments', function ($query) {
+                $query->where('started_at', '<=', now())->whereNull('ended_at')->limit(1);
+            });
     }
 
     public function columns(): array

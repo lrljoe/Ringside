@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Events;
 
 use App\Builders\EventBuilder;
+use App\Livewire\Concerns\BaseTableTrait;
 use App\Models\Event;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -12,17 +13,17 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\DateColumn;
 
 class EventsTable extends DataTableComponent
 {
-    public function builder(): EventBuilder
-    {
-        return Event::query();
-    }
+    use BaseTableTrait;
+
+    protected string $databaseTableName = "events";
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id')
-            ->setSearchPlaceholder('search events')
-            ->setColumnSelectDisabled()
-            ->setPaginationEnabled();
+    }
+
+    public function builder(): EventBuilder
+    {
+        return Event::query();
     }
 
     public function columns(): array

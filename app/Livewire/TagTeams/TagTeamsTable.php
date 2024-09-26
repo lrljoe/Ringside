@@ -5,26 +5,27 @@ declare(strict_types=1);
 namespace App\Livewire\TagTeams;
 
 use App\Builders\TagTeamBuilder;
+use App\Livewire\Concerns\BaseTableTrait;
 use App\Models\TagTeam;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class TagTeamsTable extends DataTableComponent
 {
+    use BaseTableTrait;
+
+    protected string $databaseTableName = "tag_teams";
+
+    public function configure(): void
+    {
+    }
+
     public function builder(): TagTeamBuilder
     {
         return TagTeam::query();
         // ->with('employments:id,started_at')->withWhereHas('employments', function ($query) {
         //     $query->where('started_at', '<=', now())->whereNull('ended_at')->limit(1);
         // });
-    }
-
-    public function configure(): void
-    {
-        $this->setPrimaryKey('id')
-            ->setSearchPlaceholder('search wrestlers')
-            ->setColumnSelectDisabled()
-            ->setPaginationEnabled();
     }
 
     public function columns(): array
