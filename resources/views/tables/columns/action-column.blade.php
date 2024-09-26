@@ -4,9 +4,9 @@
             <i class="ki-filled ki-dots-vertical"></i>
         </button>
         <div class="menu-dropdown menu-default w-full max-w-[175px] show">
-            @isset ( $viewLink )
+            @if ($links['view'] ?? true)
                 <div class="menu-item">
-                    <a href="{{ $viewLink }}">
+                    <a href="{{ route($path . '.show', $rowId) }}">
                         <span class="menu-icon">
                             <i class="ki-filled ki-search-list"></i>
                         </span>
@@ -17,9 +17,9 @@
 
             <div class="menu-separator"></div>
 
-            @isset ( $editLink )
+            @if ($links['edit'] ?? true)
                 <div class="menu-item">
-                    <a href="{{ $editLink }}">
+                    <a href="{{ route($path . '.edit', $rowId) }}">
                         <span class="menu-icon">
                             <i class="ki-filled ki-pencil"></i>
                         </span>
@@ -28,15 +28,10 @@
                 </div>
             @endif
 
-            @isset ( $deleteLink )
+            @if ($links['delete'] ?? true)
                 <div class="menu-item">
-                    <form
-                        action="{{ $deleteLink }}"
-                        class="d-inline"
-                        method="POST"
-                        x-data
-                        @submit.prevent="if (confirm('Are you sure you want to delete this user?')) $el.submit()"
-                    >
+                    <form action="{{ route($path . '.destroy', $rowId) }}" class="d-inline" method="POST" x-data
+                        @submit.prevent="if (confirm('Are you sure you want to delete this user?')) $el.submit()">
                         @method('DELETE')
                         @csrf
 
