@@ -35,12 +35,12 @@ class RefereesTable extends DataTableComponent
                 ->label(fn ($row, Column $column) => ucwords($row->first_name.' '.$row->last_name))
                 ->sortable(),
             Column::make(__('referees.status'), 'status')
-                ->view('status'),
+                ->view('tables.columns.status'),
             // Column::make(__('employments.start_date'), 'started_at')
             //     ->label(fn ($row, Column $column) => $row->employments->first()->started_at->format('Y-m-d')),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('referees.show', $row),
                             'editLink' => route('referees.edit', $row),

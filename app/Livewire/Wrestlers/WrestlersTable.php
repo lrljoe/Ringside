@@ -34,7 +34,7 @@ class WrestlersTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make(__('wrestlers.status'), 'status')
-                ->view('status'),
+                ->view('tables.columns.status'),
             Column::make(__('wrestlers.height'), 'height'),
             Column::make(__('wrestlers.weight'), 'weight'),
             Column::make(__('wrestlers.hometown'), 'hometown'),
@@ -42,7 +42,7 @@ class WrestlersTable extends DataTableComponent
             //     ->label(fn ($row, Column $column) => $row->employments->first()->started_at->format('Y-m-d')),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('wrestlers.show', $row),
                             'editLink' => route('wrestlers.edit', $row),

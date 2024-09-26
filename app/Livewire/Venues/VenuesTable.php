@@ -37,7 +37,7 @@ class VenuesTable extends DataTableComponent
             Column::make(__('venues.zipcode'), 'zipcode'),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('venues.show', $row),
                             'editLink' => route('venues.edit', $row),

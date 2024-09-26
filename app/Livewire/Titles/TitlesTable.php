@@ -35,12 +35,12 @@ class TitlesTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make(__('titles.status'), 'status')
-                ->view('status'),
+                ->view('tables.columns.status'),
             Column::make(__('activations.start_date'), 'started_at')
                 ->label(fn ($row, Column $column) => $row->activations->first()->started_at->format('Y-m-d')),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('titles.show', $row),
                             'editLink' => route('titles.edit', $row),

@@ -36,10 +36,10 @@ class EventsTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make(__('events.status'), 'status')
-                ->view('status'),
+                ->view('tables.columns.status'),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('events.show', $row),
                             'editLink' => route('events.edit', $row),

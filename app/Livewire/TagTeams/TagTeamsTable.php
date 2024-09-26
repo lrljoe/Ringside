@@ -35,13 +35,13 @@ class TagTeamsTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make(__('tag-teams.status'), 'status')
-                ->view('status'),
+                ->view('tables.columns.status'),
             Column::make(__('tag-teams.combined_weight'), 'combined_weight'),
             // Column::make(__('employments.start_date'), 'started_at')
             //     ->label(fn ($row, Column $column) => $row->employments->first()->started_at->format('Y-m-d')),
             Column::make(__('core.actions'), 'actions')
                 ->label(
-                    fn ($row, Column $column) => view('components.livewire.datatables.action-column')->with(
+                    fn ($row, Column $column) => view('tables.columns.action-column')->with(
                         [
                             'viewLink' => route('tag-teams.show', $row),
                             'editLink' => route('tag-teams.edit', $row),
