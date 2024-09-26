@@ -67,7 +67,9 @@
     <!-- End of Main -->
     <x-modal.search />
     <!-- End of Page -->
-    @livewireScriptConfig 
+    @vite('resources/js/app.js')
+    @livewireScripts
+    @livewire('wire-elements-modal')
 </body>
 
 </html>
