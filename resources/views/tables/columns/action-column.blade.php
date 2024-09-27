@@ -63,6 +63,14 @@
                     </button>
                 </div>
             @endif
+
+            <div class="menu-separator"></div>
+
+            <div class="menu-item">
+                <button
+                    wire:click="$dispatch('openModal', { component: 'wrestlers.wrestler-modal', arguments: { wrestler: {{ $rowId }} }})">Edit
+                    Modal</button>
+            </div>
         </div>
     </div>
 </div>
