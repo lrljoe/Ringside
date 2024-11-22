@@ -13,8 +13,10 @@ use App\Livewire\Concerns\Filters\HasFirstEmploymentDateFilter;
 use App\Livewire\Concerns\Filters\HasStatusFilter;
 use App\Models\Wrestler;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Action;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Filter;
+use Illuminate\Support\Facades\Gate;
 
 class WrestlersTable extends DataTableComponent
 {
@@ -40,12 +42,20 @@ class WrestlersTable extends DataTableComponent
 
     public function configure(): void {}
 
+    public function actions(): array
+    {
+        return [
+            Action::make('Create')
+            ->setWireAction("wire:click")
+            ->setWireActionDispatchParams("'openModal', { component: 'wrestlers.wrestler-modal' }"),
+        ];
+    }
     /** @return array<Column> */
     public function columns(): array
     {
         return [
             Column::make(__('wrestlers.name'), 'name')
-                ->searchable(),
+                ->sortable()->searchable(),
             $this->getDefaultStatusColumn(),
             Column::make(__('wrestlers.height'), 'height'),
             Column::make(__('wrestlers.weight'), 'weight'),
@@ -63,5 +73,20 @@ class WrestlersTable extends DataTableComponent
             $this->getDefaultStatusFilter($statuses),
             $this->getDefaultFirstEmploymentDateFilter(),
         ];
+    }
+
+    public function delete(Wrestler $wrestler)
+    {
+        $canDelete = Gate::inspect('delete', $wrestler);
+
+        if ($canDelete->allowed()) 
+        {
+          $wrestler->delete();
+          session()->flash('status', 'Wrestler successfully updated.');
+        }
+        else
+        {
+            session()->flash('status', 'You cannot delete this wrestler.');
+        }
     }
 }
