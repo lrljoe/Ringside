@@ -20,7 +20,11 @@ class FormModal extends ModalComponent
             $this->wrestler = Wrestler::find($wrestlerId);
             $this->form->setWrestler($this->wrestler);
         }
+    }
 
+    public function getModalTitle(): string
+    {
+        return isset($this->wrestler) ? 'Edit '.$this->wrestler->name : 'Add Wrestler';
     }
 
     public function save()
