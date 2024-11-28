@@ -27,6 +27,6 @@
     </div>
 
     <div>
-        <button wire:click="save">Save</button>
+        <x-buttons.primary wire:click="save">Save</x-buttons.primary>
     </div>
 </div>
