@@ -79,6 +79,7 @@ export default {
 					},
                     boxShadows: {
                         dropdown: '0px 7px 18px 0px rgba(0, 0, 0, 0.09)',
+                        modal: '0px 10px 14px 0px rgba(15, 42, 81, 0.03)',
 					},
                 },
             },

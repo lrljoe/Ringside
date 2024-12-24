@@ -1,11 +1,3 @@
-<div class="relative mx-auto rounded-xl flex flex-col outline-none bg-white max-w-[600px] top-[10%]">
-    <x-modal.header />
-    <x-modal.body>
-        {{ $slot }}
-    </x-modal.body>
-    @if ($footer->isNotEmpty())
-        <x-modal.footer>
-            {{ $footer }}
-        </x-modal.footer>
-    @endif
+<div class="ps-5 pe-5 outline-none grid gap-5 px-0 py-5" style="padding-block-start:.625rem; padding-block-end:.625rem;">
+    {{ $slot }}
 </div>
