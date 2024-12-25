@@ -28,6 +28,11 @@ class FormModal extends ModalComponent
         return isset($this->wrestler) ? 'Edit '.$this->wrestler->name : 'Add Wrestler';
     }
 
+    public function clear(): void
+    {
+        $this->form->reset();
+    }
+
     public function save(): void
     {
         if ($this->form->update()) {

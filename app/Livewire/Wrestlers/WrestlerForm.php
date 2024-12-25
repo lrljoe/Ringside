@@ -23,11 +23,11 @@ class WrestlerForm extends Form
 
     public Carbon|string|null $start_date = '';
 
-    public int $height_feet;
+    public ?int $height_feet;
 
-    public int $height_inches;
+    public ?int $height_inches;
 
-    public int $weight;
+    public ?int $weight;
 
     public function setWrestler(Wrestler $wrestler): void
     {

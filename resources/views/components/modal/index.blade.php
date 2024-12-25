@@ -1,5 +1,14 @@
+@props([
+    'size' => 'sm',
+])
+
 <div
-    class="relative mx-auto rounded-xl bg-white flex flex-col outline-none box-shadow-modal max-w-[500px] top-5 lg:top-[15%]">
+    {{ $attributes->class([
+        'relative mx-auto rounded-xl bg-white flex flex-col outline-none box-shadow-modal top-5 lg:top-[15%]',
+        'max-w-[400px]' => $size === 'sm',
+        'max-w-[800px]' => $size === 'md',
+        'max-w-[1100px]' => $size === 'lg',
+    ]) }}>
     <x-modal.header />
     <x-modal.body>
         {{ $slot }}
