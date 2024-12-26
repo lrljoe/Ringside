@@ -1,4 +1,4 @@
-<x-modal size="md">
+<x-modal>
     <div class="flex flex-col gap-2.5">
         <x-form.inputs.text label="Name:" name="form.name" placeholder="Testing Name Here" wire:model="form.name" />
     </div>
@@ -12,7 +12,8 @@
             <x-form.inputs.text label="Feet:" name="form.feet" placeholder="Feet" wire:model="form.height_feet" />
         </div>
         <div class="flex flex-col gap-2.5">
-            <x-form.inputs.text label="Inches:" name="form.inches" placeholder="Inches" wire:model="form.height_inches" />
+            <x-form.inputs.text label="Inches:" name="form.inches" placeholder="Inches"
+                wire:model="form.height_inches" />
         </div>
         <div class="flex flex-col gap-2.5">
             <x-form.inputs.text label="Weight:" name="form.weight" placeholder="lbs" wire:model="form.weight" />
@@ -30,8 +31,8 @@
 
     <x-slot:footer>
         <div class="flex gap-4">
-            <x-buttons.light size="" wire:click="clear">Clear</x-buttons.light>
-            <x-buttons.primary size="" wire:click="save">Save</x-buttons.primary>
+            <x-buttons.light wire:click="clear">Clear</x-buttons.light>
+            <x-buttons.primary wire:click="save">Save</x-buttons.primary>
         </div>
     </x-slot:footer>
 </x-modal>
