@@ -14,19 +14,25 @@ class WrestlerForm extends Form
 {
     public ?Wrestler $wrestler;
 
-    #[Validate('required|min:5')]
+    #[Validate('required|string|min:5|max:255')]
     public string $name = '';
 
+    #[Validate('nullable|string|max:255')]
     public string $hometown = '';
 
+    #[Validate('nullable|string|max:255')]
     public ?string $signature_move = '';
 
+    #[Validate('nullable|date')]
     public Carbon|string|null $start_date = '';
 
+    #[Validate('nullable|integer|max:7')]
     public ?int $height_feet;
 
+    #[Validate('nullable|integer|max:11')]
     public ?int $height_inches;
 
+    #[Validate('nullable|integer')]
     public ?int $weight;
 
     public function setWrestler(Wrestler $wrestler): void

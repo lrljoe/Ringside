@@ -8,7 +8,7 @@
         'max-w-[400px]' => $size === 'sm',
         'max-w-[800px]' => $size === 'md',
         'max-w-[1100px]' => $size === 'lg',
-    ]) }}>
+    ]) }} style="z-index: 90; display: block;">
     <x-modal.header />
     <x-modal.body>
         {{ $slot }}

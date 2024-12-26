@@ -1,31 +1,31 @@
 <x-modal size="md">
     <div class="flex flex-col gap-2.5">
-        <x-form.inputs.text label="Name:" name="name" placeholder="Testing Name Here" wire:model="form.name" />
+        <x-form.inputs.text label="Name:" name="form.name" placeholder="Testing Name Here" wire:model="form.name" />
     </div>
 
     <div class="flex flex-col gap-2.5">
-        <x-form.inputs.text label="Hometown:" name="hometown" placeholder="Orlando, FL" wire:model="form.hometown" />
+        <x-form.inputs.text label="Hometown:" name="form.hometown" placeholder="Orlando, FL" wire:model="form.hometown" />
     </div>
 
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center justify-between gap-2.5">
         <div class="flex flex-col gap-2.5">
-            <x-form.inputs.text label="Feet:" name="name" placeholder="Feet" wire:model="form.height_feet" />
+            <x-form.inputs.text label="Feet:" name="form.feet" placeholder="Feet" wire:model="form.height_feet" />
         </div>
         <div class="flex flex-col gap-2.5">
-            <x-form.inputs.text label="Inches:" name="name" placeholder="Inches" wire:model="form.height_inches" />
+            <x-form.inputs.text label="Inches:" name="form.inches" placeholder="Inches" wire:model="form.height_inches" />
         </div>
         <div class="flex flex-col gap-2.5">
-            <x-form.inputs.text label="Weight:" name="weight" placeholder="lbs" wire:model="form.weight" />
+            <x-form.inputs.text label="Weight:" name="form.weight" placeholder="lbs" wire:model="form.weight" />
         </div>
     </div>
 
     <div class="flex flex-col gap-2.5">
-        <x-form.inputs.text label="Signature Move:" name="signature_move" placeholder="This Amazing Finisher"
+        <x-form.inputs.text label="Signature Move:" name="form.signature_move" placeholder="This Amazing Finisher"
             wire:model="form.signature_move" />
     </div>
 
     <div class="flex flex-col gap-2.5">
-        <x-form.inputs.date label="Start Date:" name="start_date" wire:model="form.start_date" />
+        <x-form.inputs.date label="Start Date:" name="form.start_date" wire:model="form.start_date" />
     </div>
 
     <x-slot:footer>
