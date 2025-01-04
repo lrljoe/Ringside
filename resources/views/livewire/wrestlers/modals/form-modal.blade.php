@@ -12,7 +12,8 @@
             <x-form.inputs.text label="Feet:" name="form.feet" placeholder="Feet" wire:model="form.height_feet" />
         </div>
         <div class="flex flex-col gap-2.5">
-            <x-form.inputs.text label="Inches:" name="form.inches" placeholder="Inches" wire:model="form.height_inches" />
+            <x-form.inputs.text label="Inches:" name="form.inches" placeholder="Inches"
+                wire:model="form.height_inches" />
         </div>
         <div class="flex flex-col gap-2.5">
             <x-form.inputs.text label="Weight:" name="form.weight" placeholder="lbs" wire:model="form.weight" />
