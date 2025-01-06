@@ -28,7 +28,7 @@ class WrestlerForm extends LivewireBaseForm
     #[Validate('required|integer|max:11', as: 'wrestlers.inches')]
     public int $height_inches;
 
-    #[Validate('rquired|integer', as: 'wrestlers.weight')]
+    #[Validate('required|integer', as: 'wrestlers.weight')]
     public int $weight;
 
     #[Validate('nullable|string|max:255', as: 'wrestlers.signature_move')]
