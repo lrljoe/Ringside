@@ -43,7 +43,7 @@ class BaseModal extends ModalComponent
 
     public function save(): void
     {
-        if ($this->modelForm->update()) {
+        if ($this->modelForm->store()) {
             $this->dispatch('refreshDatatable');
 
             $this->closeModal();

@@ -50,7 +50,7 @@ class WrestlerForm extends LivewireBaseForm
         $this->height_inches = $inches;
     }
 
-    public function update(): bool
+    public function store(): bool
     {
         $this->validate();
 
