@@ -4,48 +4,44 @@ declare(strict_types=1);
 
 namespace App\Livewire\Wrestlers;
 
+use App\Livewire\Concerns\LivewireBaseForm;
 use App\Models\Wrestler;
 use App\ValueObjects\Height;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\Validate;
-use Livewire\Form;
 
-class WrestlerForm extends Form
+class WrestlerForm extends LivewireBaseForm
 {
-    public ?Wrestler $wrestler;
+    protected string $formModelType = Wrestler::class;
 
-    #[Validate('required|string|min:5|max:255')]
+    public Wrestler $formModel;
+
+    #[Validate('required|string|min:5|max:255', as: 'wrestlers.name')]
     public string $name = '';
 
-    #[Validate('nullable|string|max:255')]
+    #[Validate('nullable|string|max:255', as: 'wrestlers.hometown')]
     public string $hometown = '';
 
-    #[Validate('nullable|string|max:255')]
+    #[Validate('required|integer|max:7', as: 'wrestlers.feet')]
+    public int $height_feet;
+
+    #[Validate('required|integer|max:11', as: 'wrestlers.inches')]
+    public int $height_inches;
+
+    #[Validate('rquired|integer', as: 'wrestlers.weight')]
+    public int $weight;
+
+    #[Validate('nullable|string|max:255', as: 'wrestlers.signature_move')]
     public ?string $signature_move = '';
 
-    #[Validate('nullable|date')]
+    #[Validate('nullable|date', as: 'employments.started_at')]
     public Carbon|string|null $start_date = '';
 
-    #[Validate('nullable|integer|max:7')]
-    public ?int $height_feet;
-
-    #[Validate('nullable|integer|max:11')]
-    public ?int $height_inches;
-
-    #[Validate('nullable|integer')]
-    public ?int $weight;
-
-    public function setWrestler(Wrestler $wrestler): void
+    protected function loadExtraData(): void
     {
-        $this->wrestler = $wrestler;
+        $this->start_date = $this->formModel->currentEmployment?->started_at;
 
-        $this->name = $wrestler->name;
-
-        $this->hometown = $wrestler->hometown;
-        $this->signature_move = $wrestler->signature_move;
-        $this->start_date = $wrestler->currentEmployment?->started_at;
-        $this->weight = $wrestler->weight;
-        $height = $wrestler->height;
+        $height = $this->formModel->height;
 
         $feet = (int) floor($height->toInches() / 12);
         $inches = $height->toInches() % 12;
@@ -57,25 +53,27 @@ class WrestlerForm extends Form
     public function update(): bool
     {
         $this->validate();
+
+        // $this->height_feet = 7;
+        // $this->height_inches = 2;
         $height = new Height($this->height_feet, $this->height_inches);
-        if (! isset($this->wrestler)) {
-            $this->wrestler = new Wrestler([
+
+        if (! isset($this->model)) {
+            $this->formModel = new Wrestler([
                 'name' => $this->name,
                 'hometown' => $this->hometown,
-                'signature_move' => $this->signature_move,
-                'start_date' => $this->start_date,
                 'height' => $height->toInches(),
                 'weight' => $this->weight,
+                'signature_move' => $this->signature_move,
             ]);
-            $this->wrestler->save();
+            $this->formModel->save();
         } else {
-            $this->wrestler->update([
+            $this->formModel->update([
                 'name' => $this->name,
                 'hometown' => $this->hometown,
-                'signature_move' => $this->signature_move,
-                'start_date' => $this->start_date,
                 'height' => $height->toInches(),
                 'weight' => $this->weight,
+                'signature_move' => $this->signature_move,
             ]);
         }
 

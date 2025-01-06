@@ -4,46 +4,17 @@ declare(strict_types=1);
 
 namespace App\Livewire\Wrestlers\Modals;
 
+use App\Livewire\Concerns\BaseModal;
 use App\Livewire\Wrestlers\WrestlerForm;
 use App\Models\Wrestler;
-use Illuminate\View\View;
-use LivewireUI\Modal\ModalComponent;
 
-class FormModal extends ModalComponent
+class FormModal extends BaseModal
 {
-    public ?Wrestler $wrestler;
+    protected string $modelType = Wrestler::class;
 
-    public WrestlerForm $form;
+    protected string $modalLanguagePath = 'wrestlers';
 
-    public function mount(?int $wrestlerId = null): void
-    {
-        if (isset($wrestlerId)) {
-            $this->wrestler = Wrestler::find($wrestlerId);
-            $this->form->setWrestler($this->wrestler);
-        }
-    }
+    protected string $modalFormPath = 'wrestlers.modals.form-modal';
 
-    public function getModalTitle(): string
-    {
-        return isset($this->wrestler) ? 'Edit '.$this->wrestler->name : 'Add Wrestler';
-    }
-
-    public function clear(): void
-    {
-        $this->form->reset();
-    }
-
-    public function save(): void
-    {
-        if ($this->form->update()) {
-            $this->dispatch('refreshDatatable');
-
-            $this->closeModal();
-        }
-    }
-
-    public function render(): View
-    {
-        return view('livewire.wrestlers.modals.form-modal');
-    }
+    public WrestlerForm $modelForm;
 }
