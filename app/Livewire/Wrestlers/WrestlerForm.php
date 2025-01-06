@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Wrestlers;
 
-use App\Livewire\Concerns\LivewireBaseForm;
+use App\Livewire\Base\LivewireBaseForm;
 use App\Models\Wrestler;
 use App\ValueObjects\Height;
 use Illuminate\Support\Carbon;
@@ -37,7 +37,7 @@ class WrestlerForm extends LivewireBaseForm
     #[Validate('nullable|date', as: 'employments.started_at')]
     public Carbon|string|null $start_date = '';
 
-    protected function loadExtraData(): void
+    public function loadExtraData(): void
     {
         $this->start_date = $this->formModel->currentEmployment?->started_at;
 
@@ -58,7 +58,7 @@ class WrestlerForm extends LivewireBaseForm
         // $this->height_inches = 2;
         $height = new Height($this->height_feet, $this->height_inches);
 
-        if (! isset($this->model)) {
+        if (! isset($this->formModel)) {
             $this->formModel = new Wrestler([
                 'name' => $this->name,
                 'hometown' => $this->hometown,
