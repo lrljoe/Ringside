@@ -11,7 +11,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class BaseModal extends ModalComponent
 {
-    protected Model $model;
+    protected ?Model $model;
 
     protected string $modelTitleField = 'name';
 

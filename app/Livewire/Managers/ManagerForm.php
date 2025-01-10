@@ -13,7 +13,7 @@ class ManagerForm extends LivewireBaseForm
 {
     protected string $formModelType = Manager::class;
 
-    public Manager $formModel;
+    public ?Manager $formModel;
 
     #[Validate('required|string|max:255', as: 'managers.first_name')]
     public string $first_name = '';

@@ -14,7 +14,7 @@ class WrestlerForm extends LivewireBaseForm
 {
     protected string $formModelType = Wrestler::class;
 
-    public Wrestler $formModel;
+    public ?Wrestler $formModel;
 
     #[Validate('required|string|min:5|max:255', as: 'wrestlers.name')]
     public string $name = '';
