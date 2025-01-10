@@ -12,7 +12,7 @@ use App\Models\Title;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class MatchForm extends Component
+class EventMatchForm extends Component
 {
     /**
      * Event that match will be attached to.
