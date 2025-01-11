@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Wrestlers\Modals;
+namespace App\Livewire\TagTeams\Modals;
 
-use App\Livewire\Base\LivewireBaseForm;
-use App\Livewire\Wrestlers\WrestlerForm;
-use App\Models\Wrestler;
+use App\Livewire\Concerns\BaseModal;
+use App\Livewire\TagTeams\TagTeamForm;
+use App\Models\TagTeam;
 
-class FormModal extends LivewireBaseForm
+class FormModal extends BaseModal
 {
-    protected string $modelType = Wrestler::class;
+    protected string $modelType = TagTeam::class;
 
-    protected string $modalLanguagePath = 'wrestlers';
+    protected string $modalLanguagePath = 'tag-teams';
 
-    protected string $modalFormPath = 'wrestlers.modals.form-modal';
+    protected string $modalFormPath = 'tag-teams.modals.form-modal';
 
-    public WrestlerForm $modelForm;
+    public TagTeamForm $modelForm;
 }

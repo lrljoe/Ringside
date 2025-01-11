@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Wrestlers\Modals;
+namespace App\Livewire\EventMatchs\Modals;
 
-use App\Livewire\Base\LivewireBaseForm;
-use App\Livewire\Wrestlers\WrestlerForm;
-use App\Models\Wrestler;
+use App\Livewire\Concerns\BaseModal;
+use App\Livewire\EventMatches\EventMatchForm;
+use App\Models\EventMatch;
 
-class FormModal extends LivewireBaseForm
+class FormModal extends BaseModal
 {
-    protected string $modelType = Wrestler::class;
+    protected string $modelType = EventMatch::class;
 
-    protected string $modalLanguagePath = 'wrestlers';
+    protected string $modalLanguagePath = 'event-matches';
 
-    protected string $modalFormPath = 'wrestlers.modals.form-modal';
+    protected string $modalFormPath = 'event-matches.modals.form-modal';
 
-    public WrestlerForm $modelForm;
+    public EventMatchForm $modelForm;
 }
