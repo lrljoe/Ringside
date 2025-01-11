@@ -6,8 +6,6 @@ namespace App\Livewire\Venues;
 
 use App\Livewire\Base\LivewireBaseForm;
 use App\Models\Venue;
-use App\ValueObjects\Height;
-use Illuminate\Support\Carbon;
 use Livewire\Attributes\Validate;
 
 class VenueForm extends LivewireBaseForm
@@ -16,64 +14,41 @@ class VenueForm extends LivewireBaseForm
 
     public Venue $formModel;
 
-    #[Validate('required|string|min:5|max:255', as: 'Venues.name')]
+    #[Validate('required|string|min:5|max:255', as: 'venues.name')]
     public string $name = '';
 
-    #[Validate('nullable|string|max:255', as: 'Venues.hometown')]
-    public string $hometown = '';
+    #[Validate('nullable|string|max:255', as: 'venues.street_address')]
+    public string $street_address = '';
 
-    #[Validate('required|integer|max:7', as: 'Venues.feet')]
-    public int $height_feet;
+    #[Validate('required|integer|max:255', as: 'venues.city')]
+    public string $city;
 
-    #[Validate('required|integer|max:11', as: 'Venues.inches')]
-    public int $height_inches;
+    #[Validate('required|integer|max:255', as: 'venues.state')]
+    public string $state;
 
-    #[Validate('required|integer', as: 'Venues.weight')]
-    public int $weight;
-
-    #[Validate('nullable|string|max:255', as: 'Venues.signature_move')]
-    public ?string $signature_move = '';
-
-    #[Validate('nullable|date', as: 'employments.started_at')]
-    public Carbon|string|null $start_date = '';
-
-    public function loadExtraData(): void
-    {
-        $this->start_date = $this->formModel->currentEmployment?->started_at;
-
-        $height = $this->formModel->height;
-
-        $feet = (int) floor($height->toInches() / 12);
-        $inches = $height->toInches() % 12;
-
-        $this->height_feet = $feet;
-        $this->height_inches = $inches;
-    }
+    #[Validate('required|integer|size:5', as: 'venues.zip_code')]
+    public int $zipCode;
 
     public function store(): bool
     {
         $this->validate();
 
-        // $this->height_feet = 7;
-        // $this->height_inches = 2;
-        $height = new Height($this->height_feet, $this->height_inches);
-
         if (! isset($this->formModel)) {
             $this->formModel = new Venue([
                 'name' => $this->name,
-                'hometown' => $this->hometown,
-                'height' => $height->toInches(),
-                'weight' => $this->weight,
-                'signature_move' => $this->signature_move,
+                'street_address' => $this->street_address,
+                'city' => $this->city,
+                'state' => $this->state,
+                'zipcode' => $this->zipCode,
             ]);
             $this->formModel->save();
         } else {
             $this->formModel->update([
                 'name' => $this->name,
-                'hometown' => $this->hometown,
-                'height' => $height->toInches(),
-                'weight' => $this->weight,
-                'signature_move' => $this->signature_move,
+                'street_address' => $this->street_address,
+                'city' => $this->city,
+                'state' => $this->state,
+                'zipcode' => $this->zipCode,
             ]);
         }
 
