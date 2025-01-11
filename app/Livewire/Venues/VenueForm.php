@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Livewire\Venues;
 
-use App\Livewire\Base\LivewireBaseForm;
+use App\Livewire\Concerns\BaseModal;
 use App\Models\Venue;
 use Livewire\Attributes\Validate;
 
-class VenueForm extends LivewireBaseForm
+class VenueForm extends BaseModal
 {
     protected string $formModelType = Venue::class;
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Livewire\Wrestlers\Modals;
 
-use App\Livewire\Base\LivewireBaseForm;
+use App\Livewire\Concerns\BaseModal;
 use App\Livewire\Wrestlers\WrestlerForm;
 use App\Models\Wrestler;
 
-class FormModal extends LivewireBaseForm
+class FormModal extends BaseModal
 {
     protected string $modelType = Wrestler::class;
 
