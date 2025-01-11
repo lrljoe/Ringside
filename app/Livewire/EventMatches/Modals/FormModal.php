@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\EventMatchs\Modals;
+namespace App\Livewire\EventMatches\Modals;
 
 use App\Livewire\Concerns\BaseModal;
 use App\Livewire\EventMatches\EventMatchForm;
