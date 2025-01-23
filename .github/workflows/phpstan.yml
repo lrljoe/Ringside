@@ -8,6 +8,7 @@ on:
       - '**'        # matches every branch
       - '!master'
       - '!development'
+      - '!test-fix-styling'
 
 jobs:
   test:
